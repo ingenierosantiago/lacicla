@@ -177,7 +177,7 @@
 
 
 	<!-- Title Page -->
-	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(images/bg-title-page-02.jpg);">
+	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(images/header-contacto.jpg);">
 		<h2 class="tit6 t-center">
 			Cont&aacute;ctanos
 		</h2>
@@ -199,7 +199,7 @@
 				Env&iacute;anos un mensaje
 			</h3>
 
-			<form class="wrap-form-reservation size22 m-l-r-auto">
+			<form class="wrap-form-reservation size22 m-l-r-auto" name=contact onsubmit="return enviar_contacto(this);" method=POST>
 				<div class="row">
 					<div class="col-md-4">
 						<!-- Name -->
@@ -208,7 +208,7 @@
 						</span>
 
 						<div class="wrap-inputname size12 bo2 bo-rad-10 m-t-3 m-b-23">
-							<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="name" placeholder="Nombre">
+							<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="nombre" required placeholder="Nombre">
 						</div>
 					</div>
 
@@ -219,7 +219,7 @@
 						</span>
 
 						<div class="wrap-inputemail size12 bo2 bo-rad-10 m-t-3 m-b-23">
-							<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="email" placeholder="Correo">
+							<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="correo" required placeholder="Correo">
 						</div>
 					</div>
 
@@ -230,7 +230,7 @@
 						</span>
 
 						<div class="wrap-inputphone size12 bo2 bo-rad-10 m-t-3 m-b-23">
-							<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="phone" placeholder="Celular">
+							<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="telefono" required placeholder="Celular">
 						</div>
 					</div>
 
@@ -239,7 +239,7 @@
 						<span class="txt9">
 							Mensaje
 						</span>
-						<textarea class="bo-rad-10 size35 bo2 txt10 p-l-20 p-t-15 m-b-10 m-t-3" name="message" placeholder="Mensaje"></textarea>
+						<textarea class="bo-rad-10 size35 bo2 txt10 p-l-20 p-t-15 m-b-10 m-t-3" name="mensaje" required placeholder="Mensaje"></textarea>
 					</div>
 				</div>
 
@@ -479,4 +479,21 @@
 	<script src="js/main.js"></script>
 
 </body>
+<script>
+	function enviar_contacto(form){
+		console.log(document.forms["contact"]["nombre"].value);
+		return alert("hola");
+		var nombre = document.forms["contact"]["nombre"].value;
+		nombre = nombre.replace(" ", "%20");
+		var telefono = document.forms["contact"]["telefono"].value;
+		telefono = telefono.replace(" ", "%20");
+		var correo = document.forms["contact"]["correo"].value;
+		correo = correo.replace(" ", "%20");
+		var mensaje = document.forms["contact"]["mensaje"].value;
+		mensaje = mensaje.replace(" ", "%20");
+		url = "https://api.whatsapp.com/send?phone=573115863142&text=Hola,Soy%20"+nombre+",necesito:%20"+mensaje+".%20Me%20pueden%20responder%20al%20correo%20"+correo+"%20o%20al%20telefono%20"+telefono;
+		window.open(url, '_blank');
+		return false;
+	}
+</script>
 </html>
